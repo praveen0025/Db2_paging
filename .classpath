@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="/home/agile/Documents/Training/eclipse/Addons/objectify-3.0-retro/objectify-3.0-retro.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/agile/Documents/Training/eclipse/Addons/java-json.jar"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>

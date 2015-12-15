@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- The HTML 4.01 Transitional DOCTYPE declaration-->
+<!-- above set at the top of the file will set     -->
+<!-- the browser's rendering engine into           -->
+<!-- "Quirks Mode". Replacing this declaration     -->
+<!-- with a "Standards Mode" doctype is supported, -->
+<!-- but may lead to some differences in layout.   -->
+
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">   
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> 
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	 <script type="text/javascript">
+	 $(document).ready(function()
+				{ alert("started");
+			
+					$("#bdetails").click(function()							
+ 							{	myFunc_Paging();
+ 							
+ 								$("#bdetails").attr("disabled",true);
+ 							});
+					
+					$("#next").click(function()							
+						{	$("#prvs").attr("value","");myFunc_Paging();
+						});	
+					$("#prvs").click(function()	
+							{	 	$("#prvs").attr("value");
+									$("#prvs").attr("value","setBack");
+									myFunc_Paging();
+							});	
+				 function myFunc_Paging(){ 
+									 var data;
+									 var backword=$("#prvs").attr("value");
+									 var cursorval=$("#cursor").attr("value");
+	 								//$("#cursor").attr("value","Reset start");
+									//cursorval=$("#cursor").attr("value");
+									//alert(" clicked  :  "+backword+";;  "+cursorval);	 												 						
+									$("#details_table").empty();
+									$("#details_table").append("<tr><td><b>"+"Student Name"+"</td><td><b>"+"Student Id"+"</td><td><b>"+"Student Branch"+"</td></tr>");
+									$.ajax({
+										type:"POST",
+										url:"DataB",
+										data:{cursor:cursorval,back:backword},
+										success:function(data)
+													{var flag=0;
+														for (i in data)
+														{	if(flag<5)
+																{$("#details_table").append("<tr><td>"+data[i]['std_name']+"</td><td>"+data[i]['age']+"</td><td>"+data[i]['baranch']+"</td></tr>");++flag;}																												
+														}													
+														$("#cursor").attr("value",data[flag]['newcursor']);
+														cursorval=$("#cursor").attr("value");
+															//alert("cursor setup ok"+cursorval);													
+													}
+										});	 
+							}
+				});
+	 </script>
+    <title>Hello App Engine</title>
+  </head>
+	  <body>
+			     <nav>
+				  		<ul class="pager" >
+				  			<li><a id="prvs" value="">Previous</a></li>
+				  			<button type="submit" class="btn btn-success" id="bdetails">Click Here to Get all the Table Entries</button>	
+				   			 <li><a id="next">Next</a></li>
+				  		</ul>
+				</nav>				
+				<div align="center" >
+						<table id="details_table" border="blue"></table>
+				</div>
+				<a id="cursor" value=""></a>
+	  </body>
+</html>
